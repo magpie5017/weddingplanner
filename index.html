@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Wedding Planner App</title>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> 
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.0/angular-animate.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link href="css/styles.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+    <div class="wrapper" ng-controller="TabController as tabCtrl">
+        <div class="navbar-collapse collapse">
+        	<ul class="nav navbar-nav">
+            	<li><a ng-click="tabCtrl.selectTab(1)" ng-class="{active:tabCtrl.isSelected(1)}">Home</a></li>
+                <li><a ng-click="tabCtrl.selectTab(2)" ng-class="{active:tabCtrl.isSelected(2)}">Calculator</a></li>
+                <li><a ng-click="tabCtrl.selectTab(3)" ng-class="{active:tabCtrl.isSelected(3)}">Resources</a></li>
+                <li><a href="https://github.com/magpie5017" target="_blank">Github</a></li>
+            </ul>
+        </div><!-- /navbar-collapse -->
+
+            <div class="row" id="maincontent">
+                <div id="home" ng-show="tabCtrl.isSelected(1)">
+                	<div id="logo"><img src="images/logo.png" /></div>
+                </div>
+                
+                <div id="calculator" class="tabpanel" ng-show="tabCtrl.isSelected(2)" ng-controller="CalcController as calcCtrl" ng-init="calcCtrl.calcInit()">
+                    <div class="col-md-5">
+                        <h1>Wedding Calculator</h1>
+                        <p>Enter the values of each item below.</p>
+                        
+                        <div id="calcContainer" ng-repeat="cate in calcCtrl.categoryLabels">
+                        
+                        <div id="{{cate}}pt" class="ptcontainer" ng-class-even="'even'" ng-class-odd="'odd'">
+                        	<h4>{{cate|capitalize}} Expenses - Subtotal: ${{calcCtrl.sum(calcCtrl.getNames(cate))}} <a class="hidebutton" ng-click="calcCtrl.rotateIcon(cate)"><i class="fa fa-arrow-right" ng-class="calcCtrl.rotateClass{{cate}}"></i></a></h4>
+                            <div class="partition{{cate}} slide-toggle" ng-show="calcCtrl.slideToggle{{cate}}">
+                                <table id="{{cate}}calc" class="calctables">
+                                    <form novalidate>
+                                    <tr ng-repeat="item in calcCtrl.getNames(cate)"><td>{{item.name}}:</td>
+                                    <td>$<input type="number" ng-model="item.value" onClick="this.select();" /></td></tr>
+                                    </form>
+                                   <tr><td><strong>{{cate|capitalize}} Subtotal:</strong></td><td>${{calcCtrl.sum(calcCtrl.getNames(cate))}}</td></tr>
+                               </table>
+                           </div><!-- /partition -->
+                       </div><!-- /dress partition -->
+                        
+                        </div><!-- /segment repeat -->
+                        
+                        <!-- <div id="dresspt">
+                        	<h4>Dress Expenses <button class="hidebutton" onclick="slideToggle('dress')">Hide/Show</button></h4>
+                            <div class="partitiondress">
+                                <table id="dresscalc" class="calctables">
+                                    <form novalidate>
+                                    <tr ng-repeat="dress in calcCtrl.dressLabels"><td>{{dress.name}}:</td>
+                                    <td>$<input type="number" ng-model="dress.value" onClick="this.select();" /></td></tr>
+                                    </form>
+                                   <tr><td><strong>Dress Subtotal:</strong></td><td>${{dressSub = calcCtrl.sum(calcCtrl.dressLabels)}}</td></tr>
+                               </table>
+                           </div>
+                       </div> -->
+                       
+                       <!-- <div id="venuept">
+                       		<h4>Venue Expenses</h4>
+                            <div class="partitionvenue">
+                                <table id="venuecalc" class="calctables">
+                                    <form novalidate>
+                                    <tr ng-repeat="venue in calcCtrl.venueLabels"><td>{{venue.name}}:</td>
+                                    <td>$<input type="number" ng-model="venue.value" onClick="this.select();" /></td></tr>
+                                    </form>
+                                   <tr><td><strong>Venue Subtotal:</strong></td><td>${{venueSub = calcCtrl.sum(calcCtrl.venueLabels)}}</td></tr>
+                               </table>
+                           </div>
+                       </div> -->
+                       
+                       <h3>Wedding Total: ${{calcCtrl.grandTotal(calcCtrl.dressLabels,calcCtrl.venueLabels,calcCtrl.photographyLabels)}}</h3>
+                   </div><!-- /col -->
+                   
+                   <div class="col-md-7">
+                   	   <h2>Recommended Division of Expenses</h2>
+                       <img src="images/ex_pie_chart.png" />
+                   </div><!-- /col -->
+                   <div class="clearboth"></div>
+                </div>
+                
+                <div id="resources" class="tabpanel" ng-show="tabCtrl.isSelected(3)">
+                    <h1>Articles &amp; Resources</h1>
+                    <h3>Venues</h3>
+                    <ul>
+                    	<li><a href="http://www.golden-arrow.com/files/4914/5209/7397/Wedding_Package_Web_1-_2016.pdf" target="_blank">Golden Arrow</a></li>
+                        <li><a href="https://www.airbnb.com/rooms/3967791?checkin=04%2F14%2F2017&amp;checkout=04%2F17%2F2017&amp;guests=16&amp;s=xLFilpDx" target="_blank">Air BnB - Waynesboro</a></li>
+                        <li><a href="http://www.wedding-spot.com/" target="_blank">Venue Search Engine</a></li>
+                    </ul>
+                    <h3>Centerpiece Ideas</h3>
+                    <ul>
+                    	<li><a href="https://www.pinterest.com/pin/331788697527914805/" target="_blank">Terrarium</a></li>
+                        <li><a href="https://www.pinterest.com/pin/260223684692883237/" target="_blank">Sugar and Pearls</a></li>
+                        <li><a href="https://www.pinterest.com/pin/166281411215835953/" target="_blank">Ribbon and Pearls</a></li>
+                    </ul>
+                    <h3>Miscellaneous</h3>
+                    <ul>
+                    	<li><a href="http://www.thealcoholcalculator.com/?config=SmallWedding" target="_blank">Alcohol Calculator</a></li>
+                        <li><a href="http://www.costofwedding.com/" target="_blank">Cost Estimator</a></li>
+                        <li><a href="https://www.reddit.com/r/Weddingsunder10k/" target="_blank">Weddings under 10k Subreddit</a></li>
+                    </ul>
+                </div>
+            </div><!-- /maincontent -->
+    
+    </div> <!-- /wrapper -->
+</body>
+<script type="text/javascript" src="scripts/planner.js"></script>
+</html>

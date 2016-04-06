@@ -1,0 +1,82 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+	background-image:url(../images/home-bg.jpg);
+	background-size: cover;
+	background-position: center 50px;
+	background-color: #fff;	
+}
+
+.clearboth {
+	clear: both;	
+}
+
+.wrapper {
+	overflow-x: hidden;	
+}
+
+.navbar-collapse {
+	background-color: #fff;		
+}
+
+.navbar-nav {
+	float: right;
+}
+
+.navbar-nav li a.active {
+	background-color: #e6e6e6;
+	border-radius: 5px;	
+}
+
+.tabpanel {
+	height: 100%;
+	margin: 20px 50px;
+	padding: 30px 30px 50px 30px;
+	background-color: #fff;
+	border-radius: 15px;	
+	
+}
+
+#logo {
+	text-align: center;	
+	padding: 50px 0 0 0;
+}
+
+#calcContainer .ptcontainer {
+	padding: 5px;
+}
+
+#calcContainer .even {
+	background-color: #ccc;
+}
+
+#calcContainer .odd {
+	background-color: #f5f5f5;
+}
+
+#calculator td {
+	padding: 3px 3px 3px 10px;	
+}
+
+.calctables tr:last-child {
+	border-top:#999 thin solid;
+}
+
+.slide-toggle {
+  overflow: hidden;
+  transition: all 0.5s;
+}
+
+.hidebutton {
+	cursor: pointer;
+	transition: all 0.75s 0.25s;	
+}
+
+.up {
+	transform: rotate(0deg);	
+}
+
+.down {
+	transform: rotate(90deg);	
+}
