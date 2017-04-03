@@ -1,4 +1,4 @@
-#Wedding Planner App
+# Wedding Planner App
 
 Status of Project: Ongoing.
 
@@ -6,8 +6,8 @@ Status of Project: Ongoing.
 
 This app is built entirely with Javascript, Angular.js, HTML, and CSS.
 
-###Version
+### Version
 0.1
-####Version Features
+#### Version Features
 * Basic look and page structure
 * Calculator function implemented
